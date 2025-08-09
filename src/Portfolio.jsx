@@ -20,6 +20,14 @@ import {
   Layers,
   Settings,
 } from "lucide-react";
+import { FaCss3Alt, FaGitAlt, FaHtml5, FaReact } from "react-icons/fa";
+import { TbBrandCpp } from "react-icons/tb";
+import { IoLogoJavascript } from "react-icons/io";
+import { RiTailwindCssFill } from "react-icons/ri";
+import { SiExpress, SiMongodb, SiPostman } from "react-icons/si";
+import { DiNodejs } from "react-icons/di";
+import { VscVscode } from "react-icons/vsc";
+import { GrGraphQl, GrMysql } from "react-icons/gr";
 
 const Portfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,26 +56,26 @@ const Portfolio = () => {
 
   const techStacks = {
     Languages: [
-      { name: "C++", icon: <Code className="w-6 h-6 text-blue-600" /> },
+      {  icon: <TbBrandCpp  className="w-6 h-6 text-blue-600" /> },
       {
         name: "JavaScript",
-        icon: <Code className="w-6 h-6 text-yellow-500" />,
+        icon: <IoLogoJavascript  className="w-6 h-6 text-yellow-500" />,
       },
     ],
     "Web Technologies": [
-      { name: "HTML", icon: <Globe className="w-6 h-6 text-orange-500" /> },
-      { name: "CSS", icon: <Layers className="w-6 h-6 text-blue-400" /> },
+      { name: "HTML", icon: <FaHtml5  className="w-6 h-6 text-orange-500" /> },
+      { name: "CSS", icon: <FaCss3Alt  className="w-6 h-6 text-blue-400" /> },
       {
         name: "Tailwind CSS",
-        icon: <Layers className="w-6 h-6 text-cyan-500" />,
+        icon: <RiTailwindCssFill  className="w-6 h-6 text-cyan-500" />,
       },
     ],
     "Frameworks/Libraries": [
-      { name: "React.js", icon: <Code className="w-6 h-6 text-blue-400" /> },
+      { name: "React.js", icon: <FaReact  className="w-6 h-6 text-blue-400" /> },
       {
         name: "Express.js",
         icon: (
-          <Terminal
+          <SiExpress 
             className={`w-6 h-6 ${
               darkMode ? "text-gray-400" : "text-gray-600"
             }`}
@@ -78,22 +86,22 @@ const Portfolio = () => {
     "Tools/Platforms": [
       {
         name: "Node.js",
-        icon: <Terminal className="w-6 h-6 text-green-500" />,
+        icon: <DiNodejs  className="w-6 h-6 text-green-500" />,
       },
-      { name: "Git", icon: <Code className="w-6 h-6 text-orange-600" /> },
-      { name: "VS Code", icon: <Code className="w-6 h-6 text-blue-500" /> },
+      { name: "Git", icon: <FaGitAlt  className="w-6 h-6 text-orange-600" /> },
+      { name: "VS Code", icon: <VscVscode  className="w-6 h-6 text-blue-500" /> },
       {
         name: "Postman",
-        icon: <Settings className="w-6 h-6 text-orange-500" />,
+        icon: <SiPostman  className="w-6 h-6 text-orange-500" />,
       },
       { name: "REST API", icon: <Globe className="w-6 h-6 text-blue-500" /> },
-      { name: "GraphQL", icon: <Database className="w-6 h-6 text-pink-500" /> },
+      { name: "GraphQL", icon: <GrGraphQl  className="w-6 h-6 text-pink-500" /> },
     ],
     Databases: [
-      { name: "MySQL", icon: <Database className="w-6 h-6 text-blue-600" /> },
+      { name: "MySQL", icon: <GrMysql  className="w-6 h-6 text-blue-600" /> },
       {
         name: "MongoDB",
-        icon: <Database className="w-6 h-6 text-green-500" />,
+        icon: <SiMongodb  className="w-6 h-6 text-green-500" />,
       },
     ],
   };
