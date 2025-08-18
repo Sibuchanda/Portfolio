@@ -14,11 +14,7 @@ import {
   Menu,
   X,
   Download,
-  Code,
-  Database,
-  Terminal,
-  Layers,
-  Settings,
+
 } from "lucide-react";
 import { FaCss3Alt, FaGitAlt, FaHtml5, FaReact } from "react-icons/fa";
 import { TbBrandCpp } from "react-icons/tb";
@@ -361,7 +357,7 @@ const Portfolio = () => {
 
               {/* Profile Image */}
               <img
-                src="./sibu3.jpg"
+                src="./sibu.jpg"
                 alt="Sibu Chanda"
                 className="w-80 h-80 rounded-full object-cover shadow-2xl border-4 relative z-10 transition-all duration-300 hover:scale-110 floating-image"
                 style={{ borderColor: darkMode ? "#374151" : "#ffffff" }}
@@ -384,10 +380,10 @@ const Portfolio = () => {
               <div className="flex flex-wrap gap-4">
                 <a
                   href="https://github.com/Sibuchanda"
-                  className="flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 hover:scale-105"
+                  className="flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 hover:scale-105 hover:bg-red-800"
                   style={{
-                    backgroundColor: darkMode ? "#ffffff" : "#000000",
-                    color: darkMode ? "#000000" : "#ffffff",
+                    backgroundColor: darkMode ? "#374151" : "#e5e7eb",
+                    color: darkMode ? "#ffffff" : "#000000",
                   }}
                 >
                   <Github className="w-5 h-5" />
@@ -396,7 +392,11 @@ const Portfolio = () => {
 
                 <a
                   href="https://linkedin.com/in/sibu-chanda"
-                  className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 hover:scale-105"
+                  className="flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 hover:scale-105"
+                  style={{
+                    backgroundColor: darkMode ? "#374151" : "#e5e7eb",
+                    color: darkMode ? "#ffffff" : "#000000",
+                  }}
                 >
                   <Linkedin className="w-5 h-5" />
                   LinkedIn
@@ -404,7 +404,11 @@ const Portfolio = () => {
 
                 <a
                   href="mailto:sibuchanda457@gmail.com"
-                  className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-200 hover:scale-105"
+                  className="flex items-center gap-2 px-6 py-3 transition-all rounded-lg duration-200 hover:scale-105"
+                  style={{
+                    backgroundColor: darkMode ? "#374151" : "#e5e7eb",
+                    color: darkMode ? "#ffffff" : "#000000",
+                  }}
                 >
                   <Mail className="w-5 h-5" />
                   Email
@@ -412,7 +416,11 @@ const Portfolio = () => {
 
                 <a
                   href="tel:+918967668857"
-                  className="flex items-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all duration-200 hover:scale-105"
+                  className="flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 hover:scale-105"
+                  style={{
+                    backgroundColor: darkMode ? "#374151" : "#e5e7eb",
+                    color: darkMode ? "#ffffff" : "#000000",
+                  }}
                 >
                   <Phone className="w-5 h-5" />
                   Call
