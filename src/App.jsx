@@ -177,7 +177,48 @@ const sections = [
 ];
 
 const App = () => {
+
+    // ------------ Typing text logic start --------------
   const [activeSection, setActiveSection] = useState("summary");
+  const [titleIndex, setTitleIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const titles = [
+    "MERN Stack Developer",
+    "Quick Learner",
+    "Backend Designer",
+    "Problem Solver",
+  ];
+
+  useEffect(() => {
+    const currentTitle = titles[titleIndex];
+    const typingSpeed = isDeleting ? 80 : 130;
+    const pauseTime = isDeleting ? 500 : 1000;
+
+    if (!isDeleting && displayedText === currentTitle) {
+      setTimeout(() => setIsDeleting(true), pauseTime);
+      return;
+    }
+
+    if (isDeleting && displayedText === "") {
+      setIsDeleting(false);
+      setTitleIndex((prev) => (prev + 1) % titles.length);
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      setDisplayedText(
+        isDeleting
+          ? currentTitle.substring(0, displayedText.length - 1)
+          : currentTitle.substring(0, displayedText.length + 1)
+      );
+    }, typingSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [displayedText, isDeleting, titleIndex]);
+
+  // ------------ Typing text logic end --------------
 
   useEffect(() => {
     const handleScroll = () => {
@@ -253,7 +294,7 @@ const App = () => {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="text-lg md:text-xl text-cyan-400 mb-6 font-medium tracking-wide"
             >
-              {personalInfo.title}
+              {displayedText}
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: -20 }}
