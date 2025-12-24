@@ -295,6 +295,7 @@ const App = () => {
               className="text-lg md:text-xl text-cyan-400 mb-6 font-medium tracking-wide"
             >
               {displayedText}
+              <span className="animate-pulse ml-0.5">|</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: -20 }}
