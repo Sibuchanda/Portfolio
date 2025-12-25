@@ -5,7 +5,14 @@ import { CiLinkedin, CiMail } from "react-icons/ci";
 import { SiExpress, SiLeetcode } from "react-icons/si";
 import { FiExternalLink } from "react-icons/fi";
 import { TbApi, TbFileCv } from "react-icons/tb";
-import { FaHtml5, FaCss3Alt, FaReact, FaGitAlt, FaAward, FaDocker } from "react-icons/fa";
+import {
+  FaHtml5,
+  FaCss3Alt,
+  FaReact,
+  FaGitAlt,
+  FaAward,
+  FaDocker,
+} from "react-icons/fa";
 import {
   SiJavascript,
   SiTailwindcss,
@@ -15,6 +22,7 @@ import {
   SiMysql,
 } from "react-icons/si";
 import { DiNodejs } from "react-icons/di";
+import HobbiesCodeEditor from "./components/CodeEditor";
 
 const personalInfo = {
   name: "Sibu Chanda",
@@ -209,7 +217,8 @@ const certificates = [
     name: "Coding Ninja Slayground 2.0 Challenge Complition Certificate",
     issuer: "Coding Ninjs",
     date: "Nov 2024",
-    description: "Solved various types of DSA patterns(ex. Two pointer, Prefix Sum, Tree problems, Sliding window etc",
+    description:
+      "Solved various types of DSA patterns(ex. Two pointer, Prefix Sum, Tree problems, Sliding window etc",
     link: "https://drive.google.com/file/d/1lP6EpN37FAHcybzFhwxpWXaNbGm8BVDm/view?usp=sharing",
   },
   {
@@ -217,7 +226,8 @@ const certificates = [
     name: "Postman API Fundamentals Student Expert",
     issuer: "POSTMAN",
     date: "March 2025",
-    description: "Making GET, POST, PATCH, and DELETE requests, Query parameters, bodies, headers, response codes, API Key Authorization, How to use APIs in your applications",
+    description:
+      "Making GET, POST, PATCH, and DELETE requests, Query parameters, bodies, headers, response codes, API Key Authorization, How to use APIs in your applications",
     link: "https://drive.google.com/file/d/1vJzLeQsHsE0HQNWScmfnWXEmR-fT8abP/view?usp=sharing",
   },
   {
@@ -719,7 +729,7 @@ const App = () => {
             <motion.section
               id="skills"
               variants={itemVariants}
-              className="mb-32 scroll-mt-24"
+              className="mb-20 scroll-mt-24"
             >
               <div className="space-y-8">
                 {Object.entries(skills).map(([category, skillList]) => (
@@ -742,6 +752,16 @@ const App = () => {
                 ))}
               </div>
             </motion.section>
+
+             {/* Code Editor section  */}
+            <motion.div
+              variants={itemVariants}
+              className="mb-20 flex justify-start"
+            >
+              <div className="w-full md:w-[70%] lg:w-[60%]">
+                <HobbiesCodeEditor themeColors={themeColors} />
+              </div>
+            </motion.div>
 
             {/* Achievements Section */}
             <motion.section
