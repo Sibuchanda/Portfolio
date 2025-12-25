@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { LuGithub } from "react-icons/lu";
 import { CiLinkedin, CiMail } from "react-icons/ci";
 import { SiLeetcode } from "react-icons/si";
@@ -113,7 +113,6 @@ const achievements = [
     participants: "35000+",
     link: "https://leetcode.com/contest/weekly-contest-464/ranking/?region=global_v2",
   },
- 
 ];
 
 const education = [
@@ -156,7 +155,7 @@ const certificates = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     name: "CSS3",
     issuer: "Infosys",
     date: "June 2025",
@@ -176,13 +175,147 @@ const sections = [
   "certificates",
 ];
 
-const App = () => {
+const colorThemes = {
+  cyan: {
+    name: "Cyan",
+    primary: "cyan",
+    accentColor: "#0891b2",
+  },
+  blue: {
+    name: "Blue",
+    primary: "blue",
+    accentColor: "#2563eb",
+  },
+  indigo: {
+    name: "Indigo",
+    primary: "indigo",
+    accentColor: "#4f46e5",
+  },
+  slate: {
+    name: "Slate",
+    primary: "slate",
+    accentColor: "#475569",
+  },
+};
 
-    // ------------ Typing text logic start --------------
+const getThemeClasses = (theme) => {
+  const colorMap = {
+    cyan: {
+      text: "text-cyan-400",
+      hoverText: "hover:text-cyan-400",
+      bg: "bg-cyan-500/10",
+      border: "border-cyan-500/20",
+      hoverBorder: "hover:border-cyan-500/50",
+      groupHoverText: "group-hover:text-cyan-400",
+    },
+    blue: {
+      text: "text-blue-400",
+      hoverText: "hover:text-blue-400",
+      bg: "bg-blue-500/10",
+      border: "border-blue-500/20",
+      hoverBorder: "hover:border-blue-500/50",
+      groupHoverText: "group-hover:text-blue-400",
+    },
+    indigo: {
+      text: "text-indigo-400",
+      hoverText: "hover:text-indigo-400",
+      bg: "bg-indigo-500/10",
+      border: "border-indigo-500/20",
+      hoverBorder: "hover:border-indigo-500/50",
+      groupHoverText: "group-hover:text-indigo-400",
+    },
+    slate: {
+      text: "text-slate-400",
+      hoverText: "hover:text-slate-300",
+      bg: "bg-slate-500/10",
+      border: "border-slate-500/20",
+      hoverBorder: "hover:border-slate-500/50",
+      groupHoverText: "group-hover:text-slate-300",
+    },
+  };
+  return colorMap[theme];
+};
+
+// Mouse scroll animation component
+const ScrollIndicator = ({ themeColors }) => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsVisible(window.scrollY < 80);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.3 }}
+          className="flex flex-col items-center mt-6"
+        >
+          {/* Mouse */}
+          <div
+            className={`w-6 h-10 border-2 ${themeColors.border} rounded-full flex justify-center`}
+          >
+            {/* DOT */}
+            <motion.div
+              className="w-1 h-1 rounded-full border-2 mt-2"
+              style={{
+                borderColor: themeColors.text.replace("text-", ""),
+              }}
+              animate={{
+                y: [0, 6],
+                opacity: [1, 0],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+          </div>
+
+          {/* ARROWS */}
+          <div className="mt-1 flex flex-col items-center">
+            {[0, 1, 2].map((i) => (
+              <motion.span
+                key={i}
+                className={`w-3 h-3 border-r-2 border-b-2 ${themeColors.border} rotate-45`}
+                style={{ marginTop: i === 0 ? "2px" : "-4px" }}
+                animate={{ opacity: [0, 0.5, 1] }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  delay: i * 0.15,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+const App = () => {
   const [activeSection, setActiveSection] = useState("summary");
   const [titleIndex, setTitleIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+  const [currentTheme, setCurrentTheme] = useState(() => {
+    try {
+      const savedTheme = localStorage.getItem("portfolioTheme");
+      return savedTheme && colorThemes[savedTheme] ? savedTheme : "cyan";
+    } catch {
+      return "cyan";
+    }
+  });
 
   const titles = [
     "MERN Stack Developer",
@@ -191,6 +324,18 @@ const App = () => {
     "Problem Solver",
   ];
 
+  const themeColors = getThemeClasses(currentTheme);
+
+  const handleThemeChange = (theme) => {
+    try {
+      setCurrentTheme(theme);
+      localStorage.setItem("portfolioTheme", theme);
+    } catch (error) {
+      console.error("Failed to save theme:", error);
+    }
+  };
+
+  // Typing text logic
   useEffect(() => {
     const currentTitle = titles[titleIndex];
     const typingSpeed = isDeleting ? 80 : 130;
@@ -217,8 +362,6 @@ const App = () => {
 
     return () => clearTimeout(timeout);
   }, [displayedText, isDeleting, titleIndex]);
-
-  // ------------ Typing text logic end --------------
 
   useEffect(() => {
     const handleScroll = () => {
@@ -269,8 +412,37 @@ const App = () => {
     },
   };
 
+  const ColorThemeSelector = () => {
+    return (
+      <div className="mt-8">
+        <p className="text-slate-500 text-xs uppercase tracking-widest mb-3 font-medium">
+          Theme
+        </p>
+        <div className="flex gap-3">
+          {Object.entries(colorThemes).map(([key, themeData]) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => handleThemeChange(key)}
+              className={`w-8 h-8 rounded-full transition-all duration-200 border-2 cursor-pointer ${
+                currentTheme === key
+                  ? "border-white scale-110 shadow-lg"
+                  : "border-slate-600 hover:border-slate-400 hover:scale-105"
+              }`}
+              style={{
+                backgroundColor: themeData.accentColor,
+              }}
+              aria-label={`${themeData.name} theme`}
+              title={themeData.name}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-300">
+    <div className="min-h-screen bg-slate-950 text-slate-300">
       <div className="flex flex-col lg:flex-row min-h-screen">
         <motion.aside
           initial={{ opacity: 0, x: -50 }}
@@ -292,7 +464,7 @@ const App = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-lg md:text-xl text-cyan-400 mb-6 font-medium tracking-wide"
+              className={`text-lg md:text-xl ${themeColors.text} mb-6 font-medium tracking-wide`}
             >
               {displayedText}
               <span className="animate-pulse ml-0.5">|</span>
@@ -306,14 +478,23 @@ const App = () => {
               {personalInfo.brief}
             </motion.p>
 
+            {/* Color Theme Selector */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+            >
+              <ColorThemeSelector />
+            </motion.div>
+
             {/* Navigation */}
-            <nav className="mt-12 hidden lg:block">
+            <nav className="mt-6 hidden lg:block">
               {sections.map((section, index) => (
                 <motion.button
                   key={section}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
+                  transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
                   onClick={() => scrollToSection(section)}
                   className={`block w-full text-left py-3 px-0 text-xs uppercase tracking-widest font-medium transition-all duration-300 group ${
                     activeSection === section ? "text-white" : "text-slate-500"
@@ -339,14 +520,14 @@ const App = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.6 }}
-            className="flex gap-6 mt-8 lg:mt-0"
+            className="flex gap-6 mt-8 lg:mt-6"
           >
             <a
               href={personalInfo.social.leetcode}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-cyan-400 transition-colors duration-300"
-              aria-label="GitHub"
+              className={`text-slate-400 ${themeColors.hoverText} transition-colors duration-300`}
+              aria-label="LeetCode"
             >
               <SiLeetcode size={24} />
             </a>
@@ -354,7 +535,7 @@ const App = () => {
               href={personalInfo.social.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-cyan-400 transition-colors duration-300"
+              className={`text-slate-400 ${themeColors.hoverText} transition-colors duration-300`}
               aria-label="GitHub"
             >
               <LuGithub size={24} />
@@ -363,14 +544,14 @@ const App = () => {
               href={personalInfo.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-cyan-400 transition-colors duration-300"
+              className={`text-slate-400 ${themeColors.hoverText} transition-colors duration-300`}
               aria-label="LinkedIn"
             >
               <CiLinkedin size={24} />
             </a>
             <a
               href={`mailto:${personalInfo.email}`}
-              className="text-slate-400 hover:text-cyan-400 transition-colors duration-300"
+              className={`text-slate-400 ${themeColors.hoverText} transition-colors duration-300`}
               aria-label="Email"
             >
               <CiMail size={24} />
@@ -390,11 +571,16 @@ const App = () => {
             <motion.section
               id="summary"
               variants={itemVariants}
-              className="mb-32 scroll-mt-24"
+              className="mb-26 scroll-mt-24"
             >
               <p className="text-slate-300 leading-relaxed text-base md:text-lg">
                 {personalInfo.summary}
               </p>
+
+              {/* Scroll Indicator */}
+              <div className="lg:block">
+                <ScrollIndicator themeColors={themeColors} />
+              </div>
             </motion.section>
 
             {/* Projects Section */}
@@ -408,7 +594,7 @@ const App = () => {
                   key={project.id}
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
-                  className="group mb-8 p-6 rounded-lg bg-slate-800/30 hover:bg-slate-800/50 border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300"
+                  className={`group mb-8 p-6 rounded-lg bg-slate-800/30 hover:bg-slate-800/50 border border-slate-700/50 ${themeColors.hoverBorder} transition-all duration-300`}
                 >
                   <a
                     href={project.link}
@@ -416,7 +602,9 @@ const App = () => {
                     rel="noopener noreferrer"
                     className="flex items-start justify-between mb-3"
                   >
-                    <h4 className="text-white text-xl font-bold group-hover:text-cyan-400 transition-colors duration-300">
+                    <h4
+                      className={`text-white text-xl font-bold ${themeColors.groupHoverText} transition-colors duration-300`}
+                    >
                       {project.title}
                       <FiExternalLink className="inline-block ml-2 w-4 h-4 -translate-y-0.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
                     </h4>
@@ -427,7 +615,9 @@ const App = () => {
                   <ul className="text-slate-300 text-base leading-relaxed space-y-3 mb-5">
                     {project.description.map((item, index) => (
                       <li key={index} className="flex">
-                        <span className="text-cyan-400 mr-3 mt-1">•</span>
+                        <span className={`${themeColors.text} mr-3 mt-1`}>
+                          •
+                        </span>
                         <span>{item}</span>
                       </li>
                     ))}
@@ -436,7 +626,7 @@ const App = () => {
                     {project.technologies.map((tech, index) => (
                       <span
                         key={index}
-                        className="px-4 py-2 bg-cyan-500/10 text-cyan-400 rounded-full text-sm font-medium border border-cyan-500/20"
+                        className={`px-4 py-2 ${themeColors.bg} ${themeColors.text} rounded-full text-sm font-medium border ${themeColors.border}`}
                       >
                         {tech}
                       </span>
@@ -462,7 +652,7 @@ const App = () => {
                       {skillList.map((skill, index) => (
                         <span
                           key={index}
-                          className="px-4 py-2 bg-slate-800/50 text-slate-300 rounded-full text-sm font-medium border border-slate-700/50 hover:border-cyan-500/50 transition-colors duration-300"
+                          className={`px-4 py-2 bg-slate-800/50 text-slate-300 rounded-full text-sm font-medium border border-slate-700/50 ${themeColors.hoverBorder} transition-colors duration-300`}
                         >
                           {skill}
                         </span>
@@ -483,7 +673,7 @@ const App = () => {
                 {achievements.map((ach) => (
                   <div
                     key={ach.id}
-                    className="p-6 rounded-lg bg-slate-800/30 border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300"
+                    className={`p-6 rounded-lg bg-slate-800/30 border border-slate-700/50 ${themeColors.hoverBorder} transition-all duration-300`}
                   >
                     <div className="flex justify-between items-start flex-wrap gap-2">
                       <h4 className="text-white font-bold text-lg">
@@ -493,7 +683,7 @@ const App = () => {
                         href={ach.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-cyan-400 text-sm inline-flex items-center gap-1 hover:underline"
+                        className={`${themeColors.text} text-sm inline-flex items-center gap-1 hover:underline`}
                       >
                         View Contest <FiExternalLink />
                       </a>
@@ -501,7 +691,8 @@ const App = () => {
 
                     <div className="mt-3 text-slate-300 text-sm space-y-1">
                       <p className="font-bold">
-                        Rank: <span className="text-cyan-400">{ach.rank}</span>
+                        Rank:{" "}
+                        <span className={themeColors.text}>{ach.rank}</span>
                       </p>
                       <p className="font-bold">
                         <span className="text-slate-400">
@@ -533,7 +724,9 @@ const App = () => {
                           {edu.institution}
                         </p>
                       </div>
-                      <span className="text-cyan-400 text-sm font-semibold uppercase tracking-wide">
+                      <span
+                        className={`${themeColors.text} text-sm font-semibold uppercase tracking-wide`}
+                      >
                         {edu.duration}
                       </span>
                     </div>
@@ -558,7 +751,7 @@ const App = () => {
                     key={cert.id}
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
-                    className="group p-6 rounded-lg bg-slate-800/30 hover:bg-slate-800/50 border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300"
+                    className={`group p-6 rounded-lg bg-slate-800/30 hover:bg-slate-800/50 border border-slate-700/50 ${themeColors.hoverBorder} transition-all duration-300`}
                   >
                     <div className="flex justify-between items-start mb-4 flex-wrap gap-2">
                       <div className="flex-1">
@@ -575,7 +768,7 @@ const App = () => {
                                   href={cert.links[index]}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="text-white font-bold text-xl group-hover:text-cyan-400 transition-colors duration-300 inline-flex items-center"
+                                  className={`text-white font-bold text-xl ${themeColors.groupHoverText} transition-colors duration-300 inline-flex items-center`}
                                 >
                                   {name}
                                   <FiExternalLink className="inline-block ml-2 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
@@ -588,7 +781,7 @@ const App = () => {
                             href={cert.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-white font-bold text-xl group-hover:text-cyan-400 transition-colors duration-300 inline-flex items-center"
+                            className={`text-white font-bold text-xl ${themeColors.groupHoverText} transition-colors duration-300 inline-flex items-center`}
                           >
                             {cert.name}
                             <FiExternalLink className="inline-block ml-2 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
@@ -598,7 +791,9 @@ const App = () => {
                           {cert.issuer}
                         </p>
                       </div>
-                      <span className="text-cyan-400 text-sm font-semibold uppercase tracking-wide">
+                      <span
+                        className={`${themeColors.text} text-sm font-semibold uppercase tracking-wide`}
+                      >
                         {cert.date}
                       </span>
                     </div>
@@ -632,7 +827,7 @@ const App = () => {
               key={section}
               onClick={() => scrollToSection(section)}
               className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
-                activeSection === section ? "text-cyan-400" : "text-slate-400"
+                activeSection === section ? themeColors.text : "text-slate-400"
               }`}
             >
               {section.slice(0, 4)}
