@@ -888,7 +888,7 @@ const App = () => {
             {/* Footer */}
             <motion.footer
               variants={itemVariants}
-              className="pt-12 border-t border-slate-800"
+              className="mb-4 pt-12 border-t border-slate-800"
             >
               <p className="text-slate-500 text-sm">
                 © {new Date().getFullYear()} {personalInfo.name}. All rights
