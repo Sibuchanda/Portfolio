@@ -2,8 +2,19 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LuGithub } from "react-icons/lu";
 import { CiLinkedin, CiMail } from "react-icons/ci";
-import { SiLeetcode } from "react-icons/si";
+import { SiExpress, SiLeetcode } from "react-icons/si";
 import { FiExternalLink } from "react-icons/fi";
+import { TbApi, TbFileCv } from "react-icons/tb";
+import { FaHtml5, FaCss3Alt, FaReact, FaGitAlt, FaAward, FaDocker } from "react-icons/fa";
+import {
+  SiJavascript,
+  SiTailwindcss,
+  SiRedux,
+  SiPostman,
+  SiMongodb,
+  SiMysql,
+} from "react-icons/si";
+import { DiNodejs } from "react-icons/di";
 
 const personalInfo = {
   name: "Sibu Chanda",
@@ -17,6 +28,8 @@ const personalInfo = {
     github: "https://github.com/Sibuchanda",
     linkedin: "https://www.linkedin.com/in/sibu-chanda/",
     leetcode: "https://leetcode.com/u/Sibuchanda/",
+    resume:
+      "https://drive.google.com/file/d/1hRv-qu6lq0nB6P9ilWi5Flc5l6AL0f_6/view?usp=sharing",
   },
 };
 
@@ -75,20 +88,67 @@ const projects = [
 ];
 
 const skills = {
-  Languages: ["C++", "JavaScript"],
-  "Web Technologies": ["HTML", "CSS", "Tailwind CSS"],
-  "Frameworks/Libraries": ["React.js", "Express.js"],
-  "Tools/Platforms": [
-    "Node.js",
-    "Git",
-    "Docker",
-    "Postman",
-    "REST API",
-    "Redux",
-    "Redux Toolkit(RTK)",
+  Languages: [
+    { name: "C++", icon: <FaReact className="w-5 h-5 text-blue-600" /> },
+    {
+      name: "JavaScript",
+      icon: <SiJavascript className="w-5 h-5 text-yellow-400" />,
+    },
   ],
-  Databases: ["MySQL", "MongoDB"],
-  "Soft Skills": ["Leadership"],
+
+  "Web Technologies": [
+    { name: "HTML", icon: <FaHtml5 className="w-5 h-5 text-orange-500" /> },
+    { name: "CSS", icon: <FaCss3Alt className="w-5 h-5 text-blue-400" /> },
+    {
+      name: "Tailwind CSS",
+      icon: <SiTailwindcss className="w-5 h-5 text-cyan-400" />,
+    },
+  ],
+
+  "Frameworks/Libraries": [
+    { name: "React.js", icon: <FaReact className="w-5 h-5 text-blue-400" /> },
+    {
+      name: "Express.js",
+      icon: <SiExpress className="w-5 h-5 text-gray-400" />,
+    },
+  ],
+
+  "Tools/Platforms": [
+    { name: "Node.js", icon: <DiNodejs className="w-5 h-5 text-green-500" /> },
+    { name: "Git", icon: <FaGitAlt className="w-5 h-5 text-orange-500" /> },
+    { name: "Docker", icon: <FaDocker className="w-5 h-5 text-blue-500" /> },
+    {
+      name: "Postman",
+      icon: <SiPostman className="w-5 h-5 text-orange-400" />,
+    },
+    {
+      name: "REST API",
+      icon: <TbApi className="w-5 h-5 text-blue-500" />,
+    },
+    {
+      name: "Redux",
+      icon: <SiRedux className="w-5 h-5 text-purple-500" />,
+    },
+    {
+      name: "Redux Toolkit(RTK)",
+      icon: <SiRedux className="w-5 h-5 text-purple-500" />,
+    },
+  ],
+
+  Databases: [
+    { name: "MySQL", icon: <SiMysql className="w-5 h-5 text-blue-500" /> },
+    {
+      name: "MongoDB",
+      icon: <SiMongodb className="w-5 h-5 text-green-500" />,
+    },
+  ],
+
+  "Soft Skills": [
+    {
+      name: "Leadership",
+      icon: <FaAward className="w-5 h-5 text-yellow-400" />,
+    },
+  ],
 };
 
 const achievements = [
@@ -146,23 +206,35 @@ const certificates = [
   },
   {
     id: 2,
+    name: "Coding Ninja Slayground 2.0 Challenge Complition Certificate",
+    issuer: "Coding Ninjs",
+    date: "Nov 2024",
+    description: "Solved various types of DSA patterns(ex. Two pointer, Prefix Sum, Tree problems, Sliding window etc",
+    link: "https://drive.google.com/file/d/1lP6EpN37FAHcybzFhwxpWXaNbGm8BVDm/view?usp=sharing",
+  },
+  {
+    id: 3,
+    name: "Postman API Fundamentals Student Expert",
+    issuer: "POSTMAN",
+    date: "March 2025",
+    description: "Making GET, POST, PATCH, and DELETE requests, Query parameters, bodies, headers, response codes, API Key Authorization, How to use APIs in your applications",
+    link: "https://drive.google.com/file/d/1vJzLeQsHsE0HQNWScmfnWXEmR-fT8abP/view?usp=sharing",
+  },
+  {
+    id: 4,
     name: "HTML5",
     issuer: "Infosys",
     date: "June 2025",
     description: "Skilled in writing HTML5",
-    links: [
-      "https://drive.google.com/file/d/1CXjrVQEUXYK-mAWSCSBUPIGAPNsqkHa7/view",
-    ],
+    link: "https://drive.google.com/file/d/1CXjrVQEUXYK-mAWSCSBUPIGAPNsqkHa7/view",
   },
   {
-    id: 3,
+    id: 5,
     name: "CSS3",
     issuer: "Infosys",
     date: "June 2025",
     description: "Flexbox and Grid.",
-    links: [
-      "https://drive.google.com/file/d/1AU5e5Ef12v7rKNz7di2nT1FHpNcdv-0G/view",
-    ],
+    link: "https://drive.google.com/file/d/1AU5e5Ef12v7rKNz7di2nT1FHpNcdv-0G/view",
   },
 ];
 
@@ -556,6 +628,13 @@ const App = () => {
             >
               <CiMail size={24} />
             </a>
+            <a
+              href={personalInfo.social.resume}
+              className={`text-slate-400 ${themeColors.hoverText} transition-colors duration-300`}
+              aria-label="Resume"
+            >
+              <TbFileCv size={24} />
+            </a>
           </motion.div>
         </motion.aside>
 
@@ -645,16 +724,17 @@ const App = () => {
               <div className="space-y-8">
                 {Object.entries(skills).map(([category, skillList]) => (
                   <div key={category}>
-                    <h4 className="text-white font-bold mb-4 text-lg">
+                    <h4 className="text-white font-bold mb-4 text-md">
                       {category}
                     </h4>
                     <div className="flex flex-wrap gap-3">
                       {skillList.map((skill, index) => (
                         <span
                           key={index}
-                          className={`px-4 py-2 bg-slate-800/50 text-slate-300 rounded-full text-sm font-medium border border-slate-700/50 ${themeColors.hoverBorder} transition-colors duration-300`}
+                          className={`flex items-center gap-2 px-4 py-2 bg-slate-800/50 text-slate-300 rounded-full text-sm font-medium border border-slate-700/50 ${themeColors.hoverBorder} transition-colors duration-300`}
                         >
-                          {skill}
+                          {skill.icon}
+                          <span>{skill.name}</span>
                         </span>
                       ))}
                     </div>
