@@ -93,6 +93,19 @@ const projects = [
     ],
     link: "https://github.com/Sibuchanda/ChitrakaarAI",
   },
+  {
+    id: 4,
+    title: "KidzoLearn",
+    subtitle:
+      "Platform where KG to class 1 students can learn through games, animation and quizes.",
+    description: [
+      "Built a MERN stack web application with interactive learning modules for math, English, science, and general knowledge.",
+      "Implemented audio-assisted, visual-based activities and real-time scoring to support non-readers and early learners.",
+      "Developed parent-friendly progress tracking with category-wise performance analytics and secure user authentication.",
+    ],
+    technologies: ["ReactJs", "Tailwind CSS", "NodeJs", "ExpressJs", "MongoDB"],
+    link: "https://github.com/Sibuchanda/KidzoLearn",
+  },
 ];
 
 const skills = {
@@ -753,7 +766,7 @@ const App = () => {
               </div>
             </motion.section>
 
-             {/* Code Editor section  */}
+            {/* Code Editor section  */}
             <motion.div
               variants={itemVariants}
               className="mb-20 flex justify-start"
