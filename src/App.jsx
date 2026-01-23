@@ -37,7 +37,7 @@ const personalInfo = {
     linkedin: "https://www.linkedin.com/in/sibu-chanda/",
     leetcode: "https://leetcode.com/u/Sibuchanda/",
     resume:
-      "https://drive.google.com/file/d/1hRv-qu6lq0nB6P9ilWi5Flc5l6AL0f_6/view?usp=sharing",
+      "https://drive.google.com/file/d/1fjdUjYzALs0DmXCGFnaVBphw7e1AiF-9/view?usp=sharing",
   },
 };
 
