@@ -175,24 +175,24 @@ const skills = {
 const achievements = [
   {
     id: 1,
+    contest: "LeetCode Weekly Contest 485",
+    rank: 788,
+    participants: "34000+",
+    link: "https://leetcode.com/contest/weekly-contest-485/ranking/?region=global_v2",
+  },
+  {
+    id: 2,
     contest: "LeetCode Biweekly Contest 170",
     rank: 1447,
     participants: "26000+",
     link: "https://leetcode.com/contest/biweekly-contest-170/ranking/?region=global_v2",
   },
   {
-    id: 2,
+    id: 3,
     contest: "LeetCode Weekly Contest 478",
     rank: 1947,
     participants: "25000+",
     link: "https://leetcode.com/contest/weekly-contest-478/ranking/?region=global_v2",
-  },
-  {
-    id: 3,
-    contest: "LeetCode Weekly Contest 464",
-    rank: 3863,
-    participants: "35000+",
-    link: "https://leetcode.com/contest/weekly-contest-464/ranking/?region=global_v2",
   },
 ];
 
