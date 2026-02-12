@@ -37,7 +37,7 @@ const personalInfo = {
     linkedin: "https://www.linkedin.com/in/sibu-chanda/",
     leetcode: "https://leetcode.com/u/Sibuchanda/",
     resume:
-      "https://drive.google.com/file/d/1fjdUjYzALs0DmXCGFnaVBphw7e1AiF-9/view?usp=sharing",
+      "https://drive.google.com/file/d/1EK6XagdYGTGMSKOFFAcCH_O6b65mjAvF/view?usp=sharing",
   },
 };
 
@@ -175,24 +175,24 @@ const skills = {
 const achievements = [
   {
     id: 1,
+    contest: "LeetCode Weekly Contest 486",
+    rank: 532,
+    participants: "41000+",
+    link: "https://leetcode.com/contest/weekly-contest-486/ranking/?region=global_v2",
+  },
+  {
+    id: 1,
     contest: "LeetCode Weekly Contest 485",
     rank: 788,
     participants: "34000+",
-    link: "https://leetcode.com/contest/weekly-contest-485/ranking/?region=global_v2",
-  },
-  {
-    id: 2,
-    contest: "LeetCode Biweekly Contest 170",
-    rank: 1447,
-    participants: "26000+",
     link: "https://leetcode.com/contest/biweekly-contest-170/ranking/?region=global_v2",
   },
   {
     id: 3,
-    contest: "LeetCode Weekly Contest 478",
-    rank: 1947,
-    participants: "25000+",
-    link: "https://leetcode.com/contest/weekly-contest-478/ranking/?region=global_v2",
+    contest: "LeetCode Weekly Contest 488",
+    rank: 828,
+    participants: "44000+",
+    link: "https://leetcode.com/contest/weekly-contest-488/ranking/?region=global_v2",
   },
 ];
 
